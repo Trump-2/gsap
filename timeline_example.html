@@ -62,6 +62,31 @@
 
   <!-- 引入 gsap 主程式 -->
   <script src="./gsap/gsap.js"></script>
+
+  <script>
+    // set 用來設定初始捕間動畫的預設值
+    gsap.set('.banner', {
+      perspective: 300
+    })
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 1,
+    })
+
+    tl.from('.item', {
+      y: 60,
+      rotationX: -90,
+      autoAlpha: 0,
+      stagger: 2.5,
+    })
+      .to('.item', {
+        y: -60,
+        rotationX: 90,
+        autoAlpha: 0,
+        stagger: 2.5,
+      }, 2.5) // 這裡的第三個參數 2.5 代表要將 to 的動畫放在時間軸 2.5 秒的位置
+  </script>
 </body>
 
 </html>
