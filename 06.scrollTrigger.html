@@ -43,6 +43,10 @@
       justify-content: center;
       align-items: center;
     }
+
+    .active {
+      background-color: red;
+    }
   </style>
 
 </head>
@@ -58,9 +62,16 @@
   <section></section>
 
   <section id="section02">
-    <h2>1. 設定 toggleActions</h2>
+    <h2>2. 設定 toggleActions</h2>
     <div class="box b1">b1</div>
     <div class="box b2 mt-5">b2</div>
+  </section>
+
+  <section></section>
+
+  <section id="section03">
+    <h2>3. 設定 scrub</h2>
+    <div class="box c1">c1</div>
   </section>
 
   <section></section>
@@ -117,15 +128,39 @@
                   onLeaveBack => 往回時綠碰綠， scroller-start 碰到 trigger 的 start
         */
         toggleActions: 'play pause resume reverse', // 綠碰綠、紅碰紅、紅碰紅、綠碰綠
+
         // toggleClass: 'active',
-        toggleClass: {
-          targets: ['.b2'], // 要加 class 的元素
-          className: 'active' // 要加的 class 名稱
+        // toggleClass: {
+        //   targets: ['.b2'], // 要加 class 的元素
+        //   className: 'active' // 要加的 class 名稱
+        // },
+
+        onEnter() {
+          $('.b2').addClass('active')
         },
-        markers: true
+        onLeave() {
+          $('.b2').removeClass('active')
+        },
+        // markers: true
       },
       x: '85vw',
       duration: 3,
+      ease: 'none'
+    })
+
+    // 3.設定 scrub， 將卷軸的位置與動畫整體進度綁在一起
+    const tween3 = gsap.to('.c1', {
+      scrollTrigger: {
+        trigger: '.c1',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        // scrub: true, // 指動畫的進度將會根據滾動的位置來調整
+        scrub: 3, // 指的是動畫會在滾動停止後繼續播放 3 秒才完全結束。
+        markers: true
+      },
+      x: '85vw',
+      rotation: 3600,
+      backgroundColor: 'red',
       ease: 'none'
     })
   </script>
