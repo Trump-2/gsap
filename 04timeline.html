@@ -57,18 +57,29 @@
     <div class="box4"></div>
     <div class="box5"></div>
     <div class="box6"></div>
-  </div>
-  <hr>
 
-  <h3>defaults 設定</h3>
-  <p>捕間動畫屬性值相同時，會有重複不必要的程式碼</p>
-  <div class="box7"></div>
-  <div class="box8"></div>
-  <div class="box9"></div>
-  <p>使用 defaults，讓程式碼更加簡潔</p>
-  <div class="box10"></div>
-  <div class="box11"></div>
-  <div class="box12"></div>
+    <hr>
+
+    <h3>defaults 設定</h3>
+    <p>捕間動畫屬性值相同時，會有重複不必要的程式碼</p>
+    <div class="box7"></div>
+    <div class="box8"></div>
+    <div class="box9"></div>
+    <p>使用 defaults，讓程式碼更加簡潔</p>
+    <div class="box10"></div>
+    <div class="box11"></div>
+    <div class="box12"></div>
+    <hr>
+
+    <h3>timeline 的 vars 物件設定</h3>
+    <p>vars 除了可以設定 defaults，也能設定一些與捕間動畫相同的屬性</p>
+    <div class="box13"></div>
+    <div class="box14"></div>
+    <div class="box15"></div>
+    <div class="progress mb-3">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
   <!-- jQuery -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js'></script>
 
@@ -96,7 +107,7 @@
       .to('.box9', { x: 350, duration: 1, ease: 'back' })
 
     // 跟上面一樣，但使用了 defaults 讓程式碼更簡潔
-    const tl3 = gsap.timeline({
+    const tl3 = gsap.timeline({ // 紫色的 { } 就是 vars
       defaults: {
         duration: 1,
         ease: 'back'
@@ -107,6 +118,51 @@
       .to('.box10', { x: 150 })
       .to('.box11', { x: 250 })
       .to('.box12', { x: 350 })
+
+    // 使用 timeline 的 vars 物件設定
+    const tl4 = gsap.timeline({
+      defaults: {
+        duration: 1,
+        ease: 'power1.back'
+      },
+      repeat: 1,
+      repeatDelay: 1,
+      // yoyo: true,
+      // delay: 1,
+      repeatRefresh: true,
+
+
+      onStart(p1, p2) {
+        console.log(p1, p2)
+      },
+
+      // 用此屬性定義傳入 onStart() 的參數
+      onStartParams: ['時間軸動畫開始', 'YiHong'],
+
+      onComplete(p1, p2) {
+        console.log(p1, p2)
+      },
+
+      onCompleteParams: ['時間軸動畫結束', 'Wu'],
+
+      onUpdate(p1, p2) {
+        // console.log(p1, p2, this.progress().toFixed(2))
+
+        // 這裡沒跟上
+        $('.progress-bar').css({
+          width: this.totalProgress() * 100 + '%'
+        })
+      },
+
+      onUpdateParams: ['時間軸動畫更新', 'Yi']
+    })
+
+
+
+    tl4
+      .to('.box13', { x: '+=100' })
+      .to('.box14', { x: '+=150' })
+      .to('.box15', { x: '+=200' })
   </script>
 </body>
 
