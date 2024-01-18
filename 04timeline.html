@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- bootstrap -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.css' />
+
+  <style>
+    body {
+      padding-bottom: 500px;
+    }
+
+    h3 {
+      margin: 20px 0;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6,
+    .box7,
+    .box8,
+    .box9,
+    .box10,
+    .box11 {
+      width: 50px;
+      height: 50px;
+      background: black;
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h3>tween 與 timeline 差異</h3>
+    <h4>使用 tween 製作佇列動畫</h4>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <h4>使用 timeline 製作佇列動畫</h4>
+    <div class="box4"></div>
+    <div class="box5"></div>
+    <div class="box6"></div>
+  </div>
+  <!-- jQuery -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js'></script>
+
+  <!-- bootstrap -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.js'></script>
+
+  <!-- 引入 gsap 主程式 -->
+  <script src="./gsap/gsap.js"></script>
+
+  <script>
+    // 用 to() 來製作元素之間的動畫間隔 ( 佇列動畫 )，但如果更改其中一個，其他的動畫也要跟著調整，較麻煩
+    gsap.to('.box1', { x: 500, duration: 1 })
+    gsap.to('.box2', { x: 500, duration: 1, delay: 1 })
+    gsap.to('.box3', { x: 500, duration: 1, delay: 2 })
+
+    // 使用 timeline 製作佇列動畫
+    const tl1 = gsap.timeline()
+    tl1.to('.box4', { x: 500, duration: 1 }).to('.box5', { x: 500, duration: 1 }).to('.box6', { x: 500, duration: 1 })
+  </script>
+</body>
+
+</html>
