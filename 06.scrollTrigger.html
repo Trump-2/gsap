@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- bootstrap -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.css' />
+
+  <style>
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    section:nth-child(odd) {
+      background: lightblue;
+    }
+
+    section:nth-child(even) {
+      background: lightgray;
+      justify-content: center;
+    }
+
+    section h2 {
+
+      position: absolute;
+      left: 0;
+      top: 0
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      color: white;
+      font-size: 2rem;
+      background: darkorange;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <section></section>
+
+  <section id="section01">
+    <h2>1. 設定 trigger</h2>
+    <div class="box a1">a1</div>
+  </section>
+
+  <section></section>
+
+  <section id="section02">
+    <h2>1. 設定 toggleActions</h2>
+    <div class="box b1">b1</div>
+    <div class="box b2 mt-5">b2</div>
+  </section>
+
+  <section></section>
+
+  <!-- jQuery -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js'></script>
+
+  <!-- bootstrap -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.js'></script>
+
+  <!-- 引入 gsap 主程式 -->
+  <script src="./gsap/gsap.js"></script>
+
+  <!-- 引入 scrollTrigger plugin -->
+  <script src="./gsap/ScrollTrigger.js"></script>
+
+  <script>
+    // 引入完 scrollTrigger 要先註冊才能使用
+    gsap.registerPlugin(ScrollTrigger)
+    const tween1 = gsap.to('.a1', {
+      scrollTrigger: {
+        trigger: '.a1',
+
+        // 預設值
+        // start:'top bottom',
+        // end:'bottom top'
+
+        // start: 'top 50%', // 第一個參數為 trigger 的位置；第二個參數為卷軸的位置；值可為 top、center、bottom 或是數字 ( 100px, 50% )，也可以 +=100、-=100 這類的相對數值
+        // end: 'bottom 50%', // 第一個參數為 trigger 的位置；第二個參數為卷軸的位置
+
+        start: '100px 60%',
+        end: 'bottom 30%',
+        // markers: true
+      },
+      x: '85vw',
+      duration: 3,
+      ease: 'none'
+    })
+
+    // 2.設定 toggleActions // toggleActions 代表綠、紅線相交時的點，綠碰綠有兩點 ( 來、回各一 )，紅碰紅也有兩點，所有共有 4 個點可以設定
+    const tween2 = gsap.to('.b1', {
+      scrollTrigger: {
+        trigger: '.b1',
+        start: 'top center',
+        end: 'bottom 20%',
+
+
+        /*
+          值有 play、pause、resume、reverse、restart、reset、complete、none；
+          參數四個:
+                  onEnter => 第一次綠碰綠， scroller-start 碰到 trigger 的 start
+                  onLeave => 第一次紅碰紅， scroller-end 碰到 trigger 的 end
+                  onEnterBack => 往回時紅碰紅， scroller-end 碰到 trigger 的 end
+                  onLeaveBack => 往回時綠碰綠， scroller-start 碰到 trigger 的 start
+        */
+        toggleActions: 'play pause resume reverse', // 綠碰綠、紅碰紅、紅碰紅、綠碰綠
+        markers: true
+      },
+      x: '85vw',
+      duration: 3,
+      ease: 'none'
+    })
+  </script>
+</body>
+
+</html>
