@@ -117,6 +117,11 @@
                   onLeaveBack => 往回時綠碰綠， scroller-start 碰到 trigger 的 start
         */
         toggleActions: 'play pause resume reverse', // 綠碰綠、紅碰紅、紅碰紅、綠碰綠
+        // toggleClass: 'active',
+        toggleClass: {
+          targets: ['.b2'], // 要加 class 的元素
+          className: 'active' // 要加的 class 名稱
+        },
         markers: true
       },
       x: '85vw',
