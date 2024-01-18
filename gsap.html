@@ -8,10 +8,74 @@
 
   <!-- bootstrap -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.css' />
+
+  <style>
+    body {
+      padding-bottom: 500px;
+    }
+
+    h3 {
+      margin: 20px 0;
+    }
+
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5,
+    .box6,
+    .box7,
+    .box8,
+    .box9,
+    .box10,
+    .box11 {
+      width: 50px;
+      height: 50px;
+      background: black;
+      margin: 5px;
+    }
+
+    .box2 {
+      background-color: red;
+    }
+
+    .box3 {
+      background-color: green;
+    }
+
+    .box4 {
+      background-color: blue;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container">
+    <h1>1. 選擇目標</h1>
+    <div class="box1"></div>
 
+    <h2>2. 選擇群組使用陣列</h2>
+    <div class="box2"></div>
+    <div class="box2"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box3"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box4"></div>
+    <div class="box4"></div>
+
+    <h1>3. 設定 CSS 屬性</h1>
+    <div class="box5" style="margin:auto;"></div>
+    <p id="word">
+      怎麼辦，我就工業辦公室鈴聲開發多個配套多個可以證實是不是，將來考試留言討論區連載第二次就是不怕台鐵文字情緒樂隊，給予會計股東不懂我的並不正常一會設置角色出了外貿區域威望，前後阿摩斯傳奇無線周圍能源計算提問結束形式報紙證明，廣大分別不出官員合同巨大三個，表明地面尊重，這次評價女孩很熱一張主管像是還有合同遠程輸入評價施工，其實調查部隊郵箱治療能量夢想一面奇蹟是有本頁，鍵盤結構資源怎麼樣，相信有一，幻。
+    </p>
+
+    <h1>4. 設定動畫屬性</h1>
+    <div class="box6"></div>
+    <button type="button" id="play">play</button>
+    <button type="button" id="pause">pause</button>
+  </div>
   <!-- jQuery -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js'></script>
 
@@ -21,5 +85,89 @@
   <!-- 引入 gsap 主程式 -->
   <script src="./gsap/gsap.js"></script>
 </body>
+
+
+<script>
+
+
+  // 抓物件目標來演動畫
+
+  // 1. 選擇目標
+  const b1 = document.querySelector('.box1'); // 1.js
+  const b2 = $('.box1') // 2.jQuery
+
+  // 3.gsap，使用 css 常規的選擇器
+  const tween1 = gsap.to('.box1', { //gsap.to( ) 用來製作捕間動畫；tween 是物件所有有屬性和方法 ( 看官網) 
+    x: 500, // 位移量
+    duration: 2 // 動畫持續持間，單位: 秒
+  })
+
+  // 2. 選擇群組使用陣列
+  const dom1 = document.querySelectorAll('.box2')
+  const dom2 = document.querySelectorAll('.box3')
+  const dom3 = document.querySelectorAll('.box4')
+
+  const jq1 = $('.box2')
+  const jq2 = $('.box3')
+  const jq3 = $('.box4')
+
+  // 用陣列去包群組，js version
+  // const tween2 = gsap.to([dom1, dom2, dom3], {
+  //   x: 500,
+  //   duration: 4
+  // })
+
+  // 用陣列去包群組，jQuery version
+  const tween2 = gsap.to([jq1, jq2, jq3], {
+    x: 500,
+    duration: 4
+  })
+
+  // const tween2 = gsap.to('.box2,.box3,.box4', {
+  //   x: 500,
+  //   duration: 4
+  // })
+
+  // 3. 設定 CSS 屬性
+  const tween3 = gsap.to('.box5', {
+    x: 100,
+    y: 100,
+    rotation: 720, // 旋轉
+    scale: 2, // 縮放
+    // width: 100,
+    width: '100px',
+    border: '2px solid yellow',
+    boxShadow: '0 0 10px rgba(255,0,0,1)',
+    backgroundColor: 'transparent',
+    backdropFilter: 'blur(2px)'
+  })
+
+  const word = gsap.to('#word', {
+    // color: 'red',
+    color: 'random([red,green,blue])', // random 是 gsap 專屬用法，會從給定的陣列中去選擇其一
+    fontweight: 'bold',
+    fontSize: '1.5rem',
+    lineHeight: 2, // 行高
+    letterSpacing: '0.5rem', // 字距
+  })
+
+  // 4. 設定動畫屬性
+  const tween4 = gsap.to('.box6', {
+    x: 500,
+    // x: '+=100',// 相對位置 ( 會以上次播放完的位置來偏移 )
+    // x: 'random(0,100)',// 相對位置 ( 會以上次播放完的位置來偏移 )
+    duration: 2,
+    // paused: true,
+    // delay: 2, // 延遲動畫開始時間，只適用於初始播放 ( 第一次 )
+    // repeat: 2, // 重複動畫次數，初始播放不算在內，所以總共會播放 3 次
+    repeat: -1, // 無限重複播放
+    // repeatDelay: 2 // 適用於重複播放的延遲時間
+    // repeatRefresh: true, // 重複播放時，會紀錄上次播放完的狀態；需與相對位置搭配使用
+
+    yoyo: true, // 重複播放時，會來回播放 ( 像溜溜球 )
+    ease: "bounce.out" // 動畫速率
+  })
+
+</script>
 
 </html>
